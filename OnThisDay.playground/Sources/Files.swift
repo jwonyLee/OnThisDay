@@ -33,7 +33,28 @@
 import Foundation
 
 public func sampleFileURL() -> URL? {
-    return nil
+    let fileManager: FileManager = FileManager.default
+
+    do {
+        // 표준 폴더 찾기
+        let downloadsFolder: URL = try fileManager.url(
+            for: .downloadsDirectory,
+            // 검색 가능한 도메인 나열, 사용자의 폴더 검색
+            in: .userDomainMask,
+            // 폴더 만들기?
+            appropriateFor: nil,
+            create: true
+        )
+
+        // 사용자의 다운로드 폴더를 찾은 경우, SampleData.json 을 추가한 최종 URL 생성
+        let jsonFile = downloadsFolder
+            .appendingPathComponent("SampleData.json")
+        return jsonFile
+    } catch {
+        // 오류 출력
+        print(error)
+        return nil
+    }
 }
 
 public func saveSampleData(json: String) {
