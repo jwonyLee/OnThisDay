@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct GridView: View {
+    @AppStorage("showTotals") var showTotals = true
+
     var gridData: [Event]
 
     var columns: [GridItem] {
@@ -29,6 +31,11 @@ struct GridView: View {
             }
         }
         .padding(.vertical)
+
+        if showTotals {
+          Text("\(gridData.count) \(gridData.count == 1 ? "entry" : "entries") displayed.")
+            .padding(.bottom, 8)
+        }
     }
 }
 

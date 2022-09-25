@@ -59,4 +59,3 @@ struct EventView_Previews: PreviewProvider {
         }
     }
 }
- s
